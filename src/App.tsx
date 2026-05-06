@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Menu, ArrowRight, Instagram, Facebook, ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const carouselImages = [
@@ -54,21 +54,28 @@ export default function App() {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + carouselImages.length) % carouselImages.length);
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="relative w-full min-h-[100dvh] lg:h-[100dvh] flex flex-col p-2 lg:p-4 bg-[#3d9e6e] text-white font-sans antialiased overflow-x-hidden selection:bg-white selection:text-[#3d9e6e]">
-      <main className="relative z-10 w-full h-full flex flex-col lg:flex-row pb-4 lg:pb-0 mb-4 lg:mb-0 border-[4px] border-white/80 rounded-[32px] overflow-hidden">
+    <div className="relative w-full h-[100dvh] flex flex-col p-2 lg:p-4 bg-[#3d9e6e] text-white font-sans antialiased overflow-hidden selection:bg-white selection:text-[#3d9e6e]">
+      <main className="relative z-10 w-full h-full flex flex-col lg:flex-row border-[4px] border-white/80 rounded-[24px] lg:rounded-[32px] overflow-hidden">
         {/* Main large section */}
-        <section className="relative w-full lg:w-3/4 h-[600px] lg:h-full overflow-hidden group bg-[#3d9e6e]">
+        <section className="relative w-full lg:w-3/4 h-[55%] lg:h-full overflow-hidden group bg-[#3d9e6e]">
           
           {/* Carousel */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-full max-w-full lg:max-w-none px-4 lg:px-12">
              <button 
                 onClick={prevImage}
-                className="absolute -left-12 md:-left-20 lg:-left-24 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-[#2e8b57] transition-all cursor-pointer shadow-sm">
-                <ChevronLeft size={20} />
+                className="absolute left-2 sm:left-4 lg:left-12 z-30 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-black/40 border border-white flex items-center justify-center text-white hover:bg-[#2e8b57] transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                <ChevronLeft size={24} className="lg:w-7 lg:h-7" />
              </button>
              
-             <div className="w-[320px] h-[320px] md:w-[480px] md:h-[480px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] rounded-full overflow-hidden group-hover:scale-105 transition-transform duration-1000 ease-in-out relative bg-[#2e8b57]">
+             <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] lg:w-[600px] lg:h-[600px] xl:w-[700px] xl:h-[700px] rounded-full overflow-hidden group-hover:scale-105 transition-transform duration-1000 ease-in-out relative bg-[#2e8b57]">
                 {carouselImages.map((img, idx) => (
                   <img
                     key={idx}
@@ -81,66 +88,66 @@ export default function App() {
 
              <button 
                 onClick={nextImage}
-                className="absolute -right-12 md:-right-20 lg:-right-24 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-[#2e8b57] transition-all cursor-pointer shadow-sm">
-                <ChevronRight size={20} />
+                className="absolute right-2 sm:right-4 lg:right-12 z-30 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-black/40 border border-white flex items-center justify-center text-white hover:bg-[#2e8b57] transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                <ChevronRight size={24} className="lg:w-7 lg:h-7" />
              </button>
           </div>
           
-          <nav className="absolute top-6 left-6 lg:top-8 lg:left-8 z-20">
-            <div className="glass-panel px-8 py-3 lg:py-5 lg:px-12 rounded-full flex items-center shadow-lg">
-              <span className="text-4xl md:text-5xl lg:text-5xl font-display font-bold text-primary tracking-[0.2em] uppercase">AGUADUCHO</span>
+          <nav className="absolute top-4 left-4 lg:top-8 lg:left-8 z-20">
+            <div className="glass-panel px-4 py-2 lg:py-5 lg:px-12 rounded-full flex items-center shadow-lg">
+              <span className="text-2xl md:text-3xl lg:text-5xl font-display font-bold text-primary tracking-[0.2em] uppercase">AGUADUCHO</span>
             </div>
           </nav>
 
-          <div className="absolute bottom-12 left-8 lg:bottom-16 lg:left-16 z-20 max-w-2xl">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-display text-white leading-[1.1] mb-2 drop-shadow-sm">
+          <div className="absolute bottom-4 left-4 lg:bottom-12 lg:left-12 z-20 max-w-[240px] sm:max-w-xs md:max-w-md lg:max-w-2xl">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-display text-white leading-[1.1] mb-1 sm:mb-2 drop-shadow-sm">
               El Corazón del <br/> <span className="text-white">Parque San Francisco</span>
             </h1>
           </div>
 
-          <div className="absolute bottom-12 right-8 lg:right-12 flex space-x-3 z-20">
-            <a href="#" className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
-              <Instagram size={20} className="lg:w-[22px] lg:h-[22px]" />
+          <div className="absolute bottom-4 right-4 lg:bottom-12 lg:right-12 flex space-x-2 lg:space-x-3 z-20">
+            <a href="#" className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
+              <Instagram size={16} className="lg:w-[22px] lg:h-[22px]" />
             </a>
-            <a href="#" className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
-              <Facebook size={20} className="lg:w-[22px] lg:h-[22px]" />
+            <a href="#" className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
+              <Facebook size={16} className="lg:w-[22px] lg:h-[22px]" />
             </a>
           </div>
         </section>
 
         {/* Right side cards */}
-        <section className="w-full lg:w-1/4 flex flex-col h-full min-h-[600px] lg:min-h-0 border-l-[4px] border-white/80">
+        <section className="w-full lg:w-1/4 flex flex-col h-[45%] lg:h-full border-t-[4px] lg:border-t-0 lg:border-l-[4px] border-white/80">
           <Card 
             image="https://res.cloudinary.com/dfbsqy5ul/image/upload/v1778088192/eqweqweqweq_xaheto.jpg"
             label="Carta"
             onClick={() => setActiveCard("Carta")}
-            className="border-[4px] border-white/80"
+            className="border-b-[4px] lg:border-[4px] border-white/80"
           />
           <Card 
             image="https://res.cloudinary.com/dfbsqy5ul/image/upload/v1778088576/ChatGPT_Image_6_may_2026_19_28_44_zklcxb.png"
             label="Reseñas"
             onClick={() => setActiveCard("Reseñas")}
-            className="border-[4px] border-white/80"
+            className="border-b-[4px] lg:border-[4px] border-white/80"
           />
           <Card 
             image="https://res.cloudinary.com/dfbsqy5ul/image/upload/v1778088061/AGUADUCHO_Os_esperamos_en_el_Campo_San_Francisco_aguaducho_bar_camposanfrancisco_ov_vqdcg8.jpg"
             label="Donde Estamos"
             onClick={() => setActiveCard("Donde Estamos")}
-            className="border-[4px] border-white/80"
+            className="border-none lg:border-[4px] border-white/80"
           />
         </section>
       </main>
 
       {activeCard && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className={`relative w-full ${activeCard === 'Reseñas' || activeCard === 'Donde Estamos' ? 'max-w-5xl lg:max-w-6xl' : 'max-w-2xl'} bg-[#3d9e6e] border border-white/20 rounded-[32px] p-8 md:p-12 shadow-2xl overflow-y-auto max-h-[95vh]`}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60">
+          <div className={`relative w-full ${activeCard === 'Reseñas' || activeCard === 'Donde Estamos' ? 'max-w-5xl lg:max-w-6xl' : 'max-w-2xl'} bg-[#3d9e6e] border border-white/20 rounded-[20px] md:rounded-[32px] p-6 lg:p-12 shadow-2xl overflow-y-auto max-h-[90vh] md:max-h-[95vh]`}>
             <button 
               onClick={() => setActiveCard(null)}
-              className="absolute top-6 right-6 text-[#e0f0ee] hover:text-white transition-colors cursor-pointer"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-[#e0f0ee] hover:text-white transition-colors cursor-pointer"
             >
-              <X size={24} />
+              <X size={24} className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6 uppercase tracking-widest">{activeCard}</h2>
+            <h2 className="text-2xl md:text-4xl font-display font-bold text-white mb-4 md:mb-6 uppercase tracking-widest">{activeCard}</h2>
             <div className="text-[#e0f0ee] font-sans leading-relaxed text-sm md:text-base">
               {activeCard === 'Carta' && (
                 <CartaSection />
@@ -346,7 +353,7 @@ function NosotrosSection() {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2910.123!2d-5.8532!3d43.3623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd368d400d17abf7%3A0xe0ac498790e79b63!2sAguaducho!5e0!3m2!1ses!2ses!4v1234567890" 
             width="100%" 
             height="100%" 
-            style={{ border: 0, borderRadius: '12px', filter: 'grayscale(30%) hue-rotate(60deg)' }}
+            style={{ border: 0, borderRadius: '12px' }}
             allowFullScreen={false} 
             loading="lazy" 
             referrerPolicy="no-referrer-when-downgrade"
@@ -358,7 +365,7 @@ function NosotrosSection() {
 
 function Card({ image, label, onClick, className }: { image: string; label: string; onClick: () => void; className?: string }) {
   return (
-    <button onClick={onClick} className={`group relative flex-1 basis-1/3 min-h-[200px] lg:min-h-0 overflow-hidden bg-[#3d9e6e] flex items-end p-6 cursor-pointer text-left w-full block ${className || ''}`}>
+    <button onClick={onClick} className={`group relative flex-1 h-full lg:min-h-0 overflow-hidden bg-[#3d9e6e] flex items-end p-4 lg:p-6 cursor-pointer text-left w-full block ${className || ''}`}>
       <img 
         src={image} 
         alt={label} 
@@ -366,10 +373,10 @@ function Card({ image, label, onClick, className }: { image: string; label: stri
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 transition-opacity duration-500 group-hover:opacity-80"></div>
       
-      <div className="relative w-full flex justify-end items-center space-x-3 text-white transition-transform duration-500 group-hover:-translate-y-1">
-        <span className="text-[11px] font-bold tracking-[0.15em] uppercase drop-shadow-md">{label}</span>
+      <div className="relative w-full flex justify-end items-center space-x-2 lg:space-x-3 text-white transition-transform duration-500 group-hover:-translate-y-1">
+        <span className="text-[10px] lg:text-[11px] font-bold tracking-[0.1em] lg:tracking-[0.15em] uppercase drop-shadow-md">{label}</span>
         <div className="border border-white rounded-full p-1 border-opacity-80 group-hover:bg-white group-hover:text-[#3d9e6e] transition-colors">
-          <ArrowRight size={14} className="stroke-[1.5]" />
+          <ArrowRight size={12} className="stroke-[1.5] lg:w-[14px] lg:h-[14px]" />
         </div>
       </div>
     </button>
