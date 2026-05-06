@@ -106,10 +106,10 @@ export default function App() {
           </div>
 
           <div className="absolute bottom-4 right-4 lg:bottom-12 lg:right-12 flex space-x-2 lg:space-x-3 z-20">
-            <a href="#" className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
+            <a href="https://www.instagram.com/aguaducho/?hl=es" target="_blank" rel="noopener noreferrer" className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
               <Instagram size={16} className="lg:w-[22px] lg:h-[22px]" />
             </a>
-            <a href="#" className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
+            <a href="https://www.facebook.com/p/Aguaducho-100072349098031/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-black/20 border border-white flex items-center justify-center text-white hover:bg-white hover:text-[#3d9e6e] transition-all group/icon shadow-sm">
               <Facebook size={16} className="lg:w-[22px] lg:h-[22px]" />
             </a>
           </div>
