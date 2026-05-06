@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-sans: 'Lato', sans-serif;
+  --color-primary: #ffffff;
+}
+
+@layer utilities {
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid #ffffff;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
